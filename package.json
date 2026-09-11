@@ -1,0 +1,12 @@
+{
+  "name": "study-planner",
+  "version": "1.0.0",
+  "description": "Sprout Study World - Gamified Study Planner",
+  "scripts": {
+    "build": "npm install --prefix server && npm install --prefix client && npm run build --prefix client",
+    "start": "npm start --prefix server"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  }
+}

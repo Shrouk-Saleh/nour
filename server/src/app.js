@@ -1,5 +1,6 @@
 const express = require('express');
 const cors = require('cors');
+const path = require('path');
 const { notFound, errorHandler } = require('./middleware/errorHandler');
 
 const scheduleRoutes = require('./routes/scheduleRoutes');
@@ -35,7 +36,19 @@ app.use('/api/companion', companionRoutes);
 app.use('/api/achievements', achievementRoutes);
 app.use('/api/house', houseRoutes);
 
-app.use(notFound);
+// Serve React client in production
+if (process.env.NODE_ENV === 'production') {
+  const clientDist = path.join(__dirname, '../../client/dist');
+  app.use(express.static(clientDist));
+
+  // SPA fallback — send index.html for any non-API route
+  app.get('*', (req, res) => {
+    res.sendFile(path.join(clientDist, 'index.html'));
+  });
+} else {
+  app.use(notFound);
+}
+
 app.use(errorHandler);
 
 module.exports = app;

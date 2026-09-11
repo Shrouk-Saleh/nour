@@ -1,7 +1,7 @@
 // Centralized fetch wrapper. Every API module goes through this so
 // base URL, error handling, and JSON parsing live in one place.
 
-const BASE_URL = import.meta.env.VITE_API_URL || 'http://localhost:5000/api';
+const BASE_URL = import.meta.env.VITE_API_URL || '/api';
 
 class ApiRequestError extends Error {
   constructor(message, status) {
